@@ -32,7 +32,6 @@ sonar-project.properties
 CODEOWNERS
 
 # Node modules (we bundle dependencies via webpack + bundledDependencies)
-node_modules/**
 webview-ui/node_modules/**
 
 # Miscellaneous
@@ -50,4 +49,3 @@ FUNDING.yml
 GOVERNANCE.md
 SECURITY.md
 SUPPORT.md
-!node_modules/@ragarwal06/sap-cloud-application-generator/**

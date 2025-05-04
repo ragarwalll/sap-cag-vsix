@@ -1,52 +1,51 @@
-// @ts-check
+// webpack.config.js
 'use strict';
 
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
-/** @typedef {import('webpack').Configuration} WebpackConfig */
-
-const extensionConfig = {
+/** @type {import('webpack').Configuration} */
+module.exports = {
   target: 'node',
   mode: 'production',
 
+  // entry point to your extension's code
   entry: './src/extension.ts',
+
   output: {
     path: path.resolve(__dirname, 'out'),
     filename: 'extension.js',
     libraryTarget: 'commonjs2'
   },
 
-  externals: {
-    vscode: 'commonjs vscode',
-    '@ragarwal06/sap-cloud-application-generator': 
-     'commonjs @ragarwal06/sap-cloud-application-generator'
-  },
+  // externalize everything in node_modules AND vscode
+  externals: [
+    // leave vscode built-in
+    { vscode: 'commonjs vscode' },
+
+    // leave all other node_modules on disk
+    nodeExternals()
+  ],
 
   resolve: {
-    extensions: ['.ts', '.js'],
-    alias: {
-      'handlebars': 'handlebars/runtime.js'
-    }
-  },
-
-  resolveLoader: {
-    alias: {
-      'hbs': 'handlebars-loader'
-    }
+    extensions: ['.ts', '.js']
   },
 
   module: {
     rules: [
-      { test: /\.ts$/, exclude: /node_modules/, use: 'ts-loader' },
-      { test: /\.node$/, loader: 'null-loader' }
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: 'ts-loader'
+      }
     ]
   },
 
+  // don't split into chunks
   optimization: {
     splitChunks: false,
     runtimeChunk: false
   },
-  devtool: 'nosources-source-map'
-};
 
-module.exports = [extensionConfig];
+  devtool: 'hidden-source-map'
+};
