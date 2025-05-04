@@ -1,0 +1,172 @@
+.home-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+@media (min-width: 800px) {
+  .home-container {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.main-title .header-title {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.avatar {
+  padding-right: 0.5rem;
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.footer-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.home-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-section {
+  border: 1px solid var(--vscode-sideBar-border);
+  border-radius: 2px;
+  padding: 1rem;
+}
+
+.sidebar-title {
+  padding: 8px;
+  background: var(--vscode-sideBar-background);
+  font-weight: 500;
+}
+
+.sidebar-body {
+  padding: 8px;
+}
+
+.home-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-section {
+  border: 1px solid var(--vscode-sideBar-border);
+  border-radius: 4px;
+  background: var(--vscode-sideBar-background);
+}
+
+.sidebar-title {
+  padding: 8px;
+  font-weight: 600;
+  background: var(--vscode-sideBar-background);
+}
+
+.sidebar-body {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Cards list */
+.app-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.app-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.app-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.app-title {
+  font-weight: 600;
+}
+
+.app-desc {
+  font-size: 0.9em;
+  line-height: 1.3;
+  color: var(--vscode-foreground);
+}
+
+.app-link {
+  margin-top: 4px;
+  font-size: 0.85em;
+  color: var(--vscode-textLink-foreground);
+  text-decoration: none;
+}
+
+.app-link:hover {
+  text-decoration: underline;
+}
+
+/* Author section */
+.author-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.author-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.author-bio {
+  margin: 0;
+  font-size: 0.9em;
+  color: var(--vscode-foreground);
+}
+
+.author-link {
+  font-size: 0.85em;
+  color: var(--vscode-textLink-foreground);
+  text-decoration: none;
+}
+
+.author-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,53 @@
+# ------------------------------------------------------------------------------
+# Don’t bundle your editor settings, tests, source or heavy junk
+# ------------------------------------------------------------------------------
+
+# VS Code editor config
+.vscode/**
+.vscode-test/**
+
+# Source, tests, registry, pipelines
+src/**
+webview-ui/src/**
+webview-ui/public/**
+webview-ui/scripts/**
+webview-ui/.gitignore
+webview-ui/.vscode/**
+webview-ui/eslint.config.js
+webview-ui/vite.config.ts
+webview-ui/package.json
+webview-ui/package-lock.json
+registry/**
+.pipeline/**
+azure-pipelines.yml
+
+# TS + lint configs
+**/tsconfig*.json
+**/.eslintrc.json
+eslint.config.mjs
+
+# Ignore CI / utility scripts
+publish.sh
+sonar-project.properties
+CODEOWNERS
+
+# Node modules (we bundle dependencies via webpack + bundledDependencies)
+node_modules/**
+webview-ui/node_modules/**
+
+# Miscellaneous
+vsc-extension-quickstart.md
+.yarnrc
+
+# Only drop sourcemaps in output if you like
+out/**/*.map
+.github
+.gitignore
+.nvmrc
+.vscode-test.mjs
+CHANGELOG.md
+FUNDING.yml
+GOVERNANCE.md
+SECURITY.md
+SUPPORT.md
+!node_modules/@ragarwal06/sap-cloud-application-generator/**

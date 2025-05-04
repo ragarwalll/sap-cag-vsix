@@ -1,0 +1,107 @@
+name: CI & Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  packages: write
+  actions: read
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Install Webview UI dependencies
+        run: cd webview-ui && npm i
+
+      - name: Build webview UI
+        run: npm run build:webview
+
+      - name: Compile extension
+        run: npm run compile
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Install Xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Run tests under Xvfb
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" npm test
+
+  publish:
+    name: Package, Publish & Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+      packages: write
+      actions: read
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Install Webview UI dependencies
+        run: cd webview-ui && npm i
+
+      - name: Build webview UI
+        run: npm run build:webview
+
+      - name: Compile extension
+        run: npm run compile
+
+      - name: Package VSIX
+        run: npx vsce package
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+
+      - name: Capture VSIX filename
+        id: vsix
+        run: |
+          FILE=$(ls *.vsix)
+          echo "vsix_file=$FILE" >> $GITHUB_OUTPUT
+
+      - name: Publish to Marketplace (non-blocking)
+        run: npx vsce publish --pat ${{ secrets.VSCE_TOKEN }}
+        continue-on-error: true
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+
+      - name: Publish GitHub Release w/ VSIX
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: false
+          prerelease: false
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: ${{ steps.vsix.outputs.vsix_file }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
