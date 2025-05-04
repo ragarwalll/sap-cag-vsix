@@ -1,0 +1,74 @@
+name: CI & Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build webview UI
+        run: npm run build:webview
+
+      - name: Compile extension
+        run: npm run compile
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+  publish:
+    name: Publish VSIX
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build webview UI
+        run: npm run build:webview
+
+      - name: Compile extension
+        run: npm run compile
+
+      - name: Package VSIX
+        run: npx vsce package
+        env:
+          # vsce reads this token to publish
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+
+      - name: Publish to Marketplace
+        run: npx vsce publish --pat $VSCE_TOKEN
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}

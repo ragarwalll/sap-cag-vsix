@@ -1,0 +1,58 @@
+.vscode/**
+.vscode-test/**
+out/**
+node_modules/**
+src/**
+.gitignore
+.yarnrc
+webpack.config.js
+vsc-extension-quickstart.md
+**/tsconfig.json
+**/eslint.config.mjs
+**/*.map
+**/*.ts
+**/.vscode-test.*
+
+# This file contains all the files/directories that should
+# be ignored (i.e. not included) in the final packaged extension.
+
+# Ignore extension configs
+.vscode/**
+
+# Ignore test files
+.vscode-test/**
+out/test/**
+
+# Ignore source code
+src/**
+registry/**
+.pipeline/**
+azure-pipelines.yml
+tsconfig.eslint.json
+tsconfig.base.json
+sonar-project.properties
+CODEOWNERS
+tsconfig.eslint.json
+publish.sh
+
+# Ignore all webview-ui files except the build directory
+webview-ui/src/**
+webview-ui/public/**
+webview-ui/scripts/**
+webview-ui/index.html
+webview-ui/README.md
+webview-ui/package.json
+webview-ui/package-lock.json
+webview-ui/node_modules/**
+webview-ui/registry/**
+webview-ui/.pipeline/**
+webview-ui/tsconfig.eslint.json
+
+# Ignore Misc
+.yarnrc
+vsc-extension-quickstart.md
+**/.gitignore
+**/tsconfig.json
+**/vite.config.ts
+**/.eslintrc.json
+**/*.map
