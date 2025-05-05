@@ -92,7 +92,7 @@ export default function Home() {
                             SAP Cloud Application Generator
                         </span>
                         <br />
-                        <VscodeBadge variant='counter'>1.1.2</VscodeBadge>
+                        <VscodeBadge variant='counter' className='minimal-margin-top'>1.2.4</VscodeBadge>
                     </div>
                     <div className='header-actions'>
                         <VscodeIcon

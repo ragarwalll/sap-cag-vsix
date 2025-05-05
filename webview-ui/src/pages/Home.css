@@ -170,3 +170,7 @@
 .author-link:hover {
   text-decoration: underline;
 }
+
+.minimal-margin-top {
+  margin-top: 4px;
+}
