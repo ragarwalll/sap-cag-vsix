@@ -2,7 +2,7 @@
   "name": "create-sap-fs-app-vsix",
   "displayName": "SAP Cloud Application Generator",
   "description": "Creating SAP full stack applications in seconds.",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "publisher": "ragarwal06",
   "license": "ISC",
   "repository": {
@@ -76,8 +76,8 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
-    "@ragarwal06/sap-cloud-application-generator": "^1.1.8",
-    "@ragarwal06/sap-cloud-application-generator-types": "^0.1.3",
+    "@ragarwal06/sap-cloud-application-generator": "^1.2.0",
+    "@ragarwal06/sap-cloud-application-generator-types": "^0.1.4",
     "chokidar": "^4.0.3",
     "handlebar": "^1.0.0",
     "handlebars": "^4.7.8",
