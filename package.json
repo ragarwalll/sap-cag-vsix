@@ -78,7 +78,7 @@
   "dependencies": {
     "@ragarwal06/sap-cloud-application-generator": "^1.2.0",
     "@ragarwal06/sap-cloud-application-generator-types": "^0.1.4",
-    "chokidar": "^4.0.3",
+    "chokidar": "^5.0.0",
     "handlebar": "^1.0.0",
     "handlebars": "^4.7.8",
     "metalsmith": "^2.6.3"
